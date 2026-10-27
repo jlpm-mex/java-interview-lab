@@ -26,7 +26,7 @@ Validate solutions with automated tests.
 | # | Exercise | Status | Concept | Time | Space |
 |---|---|---|---|---|---|
 | 001 | [Detect Duplicates](docs/exercises/001-contains-duplicate.md) | Completed | HashSet | `O(n)` | `O(n)` |
-| 002 | [Two Sum](docs/exercises/002-two-sum.md) | In Progress | HashMap | `O(n)` | `O(n)` |
+| 002 | [Two Sum](docs/exercises/002-two-sum.md) | Complete | HashMap | `O(n)` | `O(n)` |
 | 003 | [First Non-Repeating Character](docs/exercises/003-first-non-repeating-character.md) | Completed | HashMap | `O(n)` | `O(k)` |
 | 004 | [Valid Parentheses](docs/exercises/004-valid-parentheses.md) | Completed | Deque as stack | `O(n)` | `O(n)` |
 | 005 | [Best Time to Buy and Sell Stock](docs/exercises/005-maxprofit-calculator.md) | Completed | Operations order | `O(n)` | `O(1)` |

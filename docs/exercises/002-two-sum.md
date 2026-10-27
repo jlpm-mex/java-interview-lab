@@ -1,7 +1,7 @@
 ---
 exercise: 002
 title: Two Sum
-status: In Progress
+status: Complete
 concept: HashMap
 time_complexity: O(n)
 space_complexity: O(n)

@@ -1,21 +1,36 @@
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
 
-  - name: Set up Java
-    uses: actions/setup-java@v4
-    with:
-      distribution: temurin
-      java-version: '17'
-      cache: maven
+name: Validate Exercises
 
-  - name: Set up Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: '3.x'
+on:
+  push:
+  pull_request:
 
-  - name: Run Java tests
-    run: mvn verify
+permissions:
+  contents: read
 
-  - name: Validate exercises table
-    run: python3 scripts/generate_exercises_table.py --check
+jobs:
+  validate:
+    name: Validate code and documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run Java tests
+        run: mvn verify
+
+      - name: Validate exercises table
+        run: python3 scripts/generate_exercises_table.py --check

@@ -1,7 +1,7 @@
 ---
 exercise: 002
 title: Two Sum
-status: Complete
+status: Completed
 concept: HashMap
 time_complexity: O(n)
 space_complexity: O(n)
@@ -13,51 +13,78 @@ space_complexity: O(n)
 
 ## Problem
 
-Given an array of integers `nums` and an integer `target`, return the indices of two distinct elements whose sum equals `target`.
+Given an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`.
 
-Assume exactly one valid solution exists and the same element cannot be used twice.
+You may assume that each input has exactly one valid solution, and you cannot use the same element twice.
 
-## Examples
-
-| Input                               | Output   |
-|-------------------------------------|----------|
-| `nums = [2, 7, 11, 15], target = 9` | `[0, 1]` |
-| `nums = [3, 2, 4], target = 6`      | `[1, 2]` |
-| `nums = [3, 3], target = 6`         | `[0, 1]` |
+Return the indices in any order.
 
 ## Approach
 
-Use a `HashMap` to store each previously visited number and its index.
+Use a `HashMap` to store previously visited numbers and their corresponding indices.
 
-For each element, calculate its complement (`target - nums[i]`) and check whether that complement exists in the map. If it does, return the stored index and the current index. Otherwise, store the current number and its index.
+Iterate through the array and calculate the complement needed to reach the target:
 
-The complement is checked before inserting the current element to prevent using the same element twice.
+`complement = target - nums[i]`
 
-## Complexity Analysis
+For each element:
 
-- **Time Complexity:** O(n) expected, assuming expected O(1) hash map operations.
-- **Space Complexity:** O(n), since the map may store up to n elements.
+1. Calculate the complement.
+2. Check whether the complement already exists in the HashMap.
+3. If it exists, return the index of the complement and the current index.
+4. Otherwise, store the current number and its index in the HashMap.
 
-Where `n` is the length of the input array.
-
-## Edge Cases
-
-- Duplicate values, such as `[3, 3]`.
-- Negative numbers and zero.
-- No valid solution, if the method's contract allows that case.
-- Null or insufficient input, according to the method's input contract.
-
-## Tests
-
-Automated tests cover the examples above, duplicate values, negative numbers, and invalid inputs where applicable.
-
-See [`TwoSumTest.java`](../../src/test/java/algorithms/TwoSumTest.java).
+This approach avoids nested loops by using the HashMap for efficient lookups.
 
 ## Implementation
 
-See [`TwoSum.java`](../../src/main/java/algorithms/TwoSum.java).
+**Class:** `TwoSum.java`
 
-## Key Takeaways
+**Method:** `twoSum(int[] nums, int target)`
 
-- A hash map can reduce a brute-force O(n²) solution to expected O(n) time.
-- Checking the complement before inserting the current element prevents reusing the same index.
+**Data Structure:** `HashMap<Integer, Integer>`
+
+See [`TwoSum.java`](../../src/main/java/TwoSum.java)
+
+## Complexity Analysis
+
+| Metric | Complexity | Explanation |
+|---|---|---|
+| Time | O(n) expected | The array is traversed once, with expected O(1) HashMap lookups and insertions. |
+| Space | O(n) | In the worst case, the HashMap stores up to n elements. |
+
+## Testing
+
+**Test class:** `TwoSumTest.java`
+
+The test suite uses JUnit 5 with `@ParameterizedTest` and `@MethodSource` to validate different scenarios.
+
+See [`TwoSumTest`](../../src/test/java/TwoSumTest.java)
+
+### Valid test cases
+
+- Valid pair of numbers.
+- Multiple valid solutions, returning the first match found.
+- Array containing exactly two elements.
+- Solution located in the middle of the array.
+- Negative numbers.
+- Sum involving zero.
+- Two negative numbers.
+- Solution located at the beginning of the array.
+- Solution located at the end of the array.
+
+### Invalid test cases
+
+- Empty array.
+- Null array.
+- Array containing only one element.
+- No valid pair found.
+
+Invalid inputs are expected to throw `IllegalArgumentException`.
+
+## Decisions
+
+- **HashMap over nested loops:** A HashMap reduces the expected time complexity from O(n²) to O(n), at the cost of additional space.
+- **Complement lookup before insertion:** Checking whether the complement exists before storing the current element prevents using the same array index twice.
+- **Store values and indices:** The HashMap uses the array value as the key and its index as the value, allowing the method to return the original indices.
+- **Return the first match:** The implementation returns the first valid pair found during the array traversal.
